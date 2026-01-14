@@ -10,8 +10,14 @@ variable "cluster_version" {
   type = string
 }
 
+variable "vpc_id" {
+  type        = string
+  description = "VPC ID where EKS will be deployed"
+}
+
 variable "private_subnet_ids" {
-  type = list(string)
+  type        = list(string)
+  description = "Private subnet IDs for worker nodes"
 }
 
 variable "tags" {
