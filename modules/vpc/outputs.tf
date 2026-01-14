@@ -7,5 +7,5 @@ output "region" {
 }
 
 output "private_subnet_ids" {
-  value = aws_subnet.private.*.id
+  value = aws_subnet.private[*].id
 }
