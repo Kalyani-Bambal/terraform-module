@@ -1,7 +1,7 @@
 resource "aws_iam_role" "eks_cluster_role" {
   name = "${var.env}-eks-cluster-role"
 
-  assume_role_policy = jasonencode({
+  assume_role_policy = jsonencode({
     version = "2012-10-17"
     statement = [{
         effect = "Allow"
