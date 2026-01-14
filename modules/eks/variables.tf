@@ -10,7 +10,7 @@ variable "cluster_version" {
   type = string
 }
 
-variable "private_subnet_ids" {
+variable "private_subnet" {
   type = list(string)
 }
 
