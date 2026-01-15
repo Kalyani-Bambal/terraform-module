@@ -14,10 +14,6 @@ variable "bastion_key_name" {
   type = string
 }
 
-variable "bastion_security_group_ids" {
-  type = list(string)
-}
-
 variable "common_tags" {
   type = map(string)
 }
@@ -33,4 +29,3 @@ variable "allowed_ssh_cidrs" {
 variable "vpc_id" {
   type = string
 }
-
