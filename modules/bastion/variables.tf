@@ -6,7 +6,7 @@ variable "bastion_instance_type" {
   type = string
 }
 
-variable "bastion_subnet_id" {
+variable "public_subnet_id" {
   type = string
 }
 
@@ -22,14 +22,14 @@ variable "common_tags" {
   type = map(string)
 }
 
-variable "environment" {
+variable "env" {
   type = string
 }
 
-variable "allow_ssh_cidrs" {
+variable "allowed_ssh_cidrs" {
   type = list(string)
 }
 
-variable "bastion_vpc_id" {
+variable "vpc_id" {
   type = string
 }

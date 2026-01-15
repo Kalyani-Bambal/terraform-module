@@ -1,7 +1,7 @@
 resource "aws_instance" "bastion" {
   ami                         = var.bastion_ami
   instance_type               = var.bastion_instance_type
-  subnet_id                   = var.bastion_subnet_id
+  subnet_id                   = var.public_subnet_id
   key_name                    = var.bastion_key_name
   vpc_security_group_ids      = var.bastion_security_group_ids
   associate_public_ip_address = true
@@ -9,22 +9,22 @@ resource "aws_instance" "bastion" {
   tags = merge(
     var.common_tags,
     {
-      Name = "${var.environment}-bastion"
+      Name = "${var.env}-bastion"
     }
   )
   
 }
 
 resource "aws_security_group" "bastion_sg" {
-  name        = "${var.environment}-bastion-sg"
+  name        = "${var.env}-bastion-sg"
   description = "Security group for bastion host"
-  vpc_id      = var.bastion_vpc_id
+  vpc_id      = var.vpc_id
 
   ingress {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = var.allow_ssh_cidrs
+    cidr_blocks = var.allowed_ssh_cidrs
   }
 
   egress {
