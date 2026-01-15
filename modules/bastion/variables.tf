@@ -33,3 +33,4 @@ variable "allowed_ssh_cidrs" {
 variable "vpc_id" {
   type = string
 }
+

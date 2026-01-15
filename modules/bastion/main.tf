@@ -3,7 +3,7 @@ resource "aws_instance" "bastion" {
   instance_type               = var.bastion_instance_type
   subnet_id                   = var.public_subnet_id
   key_name                    = var.bastion_key_name
-  vpc_security_group_ids      = var.bastion_security_group_ids
+  vpc_security_group_ids      = aws_security_group.bastion_sg.id != null ? [aws_security_group.bastion_sg.id] : var.bastion_security_group_ids
   associate_public_ip_address = true
 
   tags = merge(
