@@ -6,7 +6,7 @@ variable "bastion_instance_type" {
   type = string
 }
 
-variable "public_subnet_id" {
+variable "public_subnet_ids" {
   type = string
 }
 
