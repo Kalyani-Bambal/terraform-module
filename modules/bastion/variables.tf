@@ -7,7 +7,7 @@ variable "bastion_instance_type" {
 }
 
 variable "public_subnet_ids" {
-  type = string
+  type = list(string)
 }
 
 variable "bastion_key_name" {
