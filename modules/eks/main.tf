@@ -1,14 +1,14 @@
 resource "aws_iam_role" "eks_cluster_role" {
   name               = "${var.env}-eks-cluster-role"
-  assume_role_policy = jsondecode({
-    version = "2012-10-17"
-    statement = [
+  assume_role_policy = jsonencode({
+    "Version" = "2012-10-17"
+    "Statement" = [
       {
-        effect = "Allow"
-        principal = {
-          service = "eks.amazonaws.com"
+        "Effect" = "Allow"
+        "Principal" = {
+          "Service" = "eks.amazonaws.com"
         }
-        action = "sts:AssumeRole"
+        "Action" = "sts:AssumeRole"
       }
     ]
   })
