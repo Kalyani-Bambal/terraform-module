@@ -7,7 +7,7 @@ resource "aws_instance" "bastion" {
     aws_security_group.bastion_sg.id
   ]
   associate_public_ip_address = true
-
+  user_data = file("${path.module}/user_data.sh")
   tags = merge(
     var.common_tags,
     {
