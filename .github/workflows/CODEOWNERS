@@ -1,0 +1,5 @@
+# Default code owners for all changes
+* @ashubambal @kalyani-bambal @soft-consist/softconsist-in
+
+# Terraform file owners
+*.tf @ashubambal @kalyani-bambal @soft-consist/softconsist-in
