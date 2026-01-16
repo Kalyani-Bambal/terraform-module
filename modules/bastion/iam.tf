@@ -4,7 +4,7 @@ resource "aws_iam_role" "bastion_role" {
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
     Statement = [{
-      Effect    = "Allow"
+      Effect = "Allow"
       Principal = {
         Service = "ec2.amazonaws.com"
       }
@@ -20,8 +20,8 @@ resource "aws_iam_role_policy_attachment" "eks_read" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
 }
 
+
 resource "aws_iam_instance_profile" "bastion_profile" {
   name = "${var.env}-bastion-profile"
   role = aws_iam_role.bastion_role.name
 }
-
