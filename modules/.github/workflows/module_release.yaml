@@ -1,0 +1,65 @@
+name: Module Release
+
+on:
+  pull_request:
+    branches:
+      - main
+    types:
+      - closed
+    paths:
+      - "modules/**"
+
+permissions:
+  contents: write   # required for tag + release
+
+jobs:
+  release:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Get latest tag
+        id: latest_tag
+        run: |
+          git fetch --tags
+          TAG=$(git tag --sort=-v:refname | head -n 1)
+          if [ -z "$TAG" ]; then
+            TAG="v0.0.0"
+          fi
+          echo "tag=$TAG" >> $GITHUB_OUTPUT
+
+      - name: Calculate next version
+        id: next_version
+        run: |
+          VERSION=${{ steps.latest_tag.outputs.tag }}
+          VERSION=${VERSION#v}
+
+          IFS='.' read -r MAJOR MINOR PATCH <<< "$VERSION"
+          PATCH=$((PATCH + 1))
+
+          NEXT_TAG="v$MAJOR.$MINOR.$PATCH"
+          echo "next_tag=$NEXT_TAG" >> $GITHUB_OUTPUT
+
+      - name: Create git tag
+        run: |
+          git tag ${{ steps.next_version.outputs.next_tag }}
+          git push origin ${{ steps.next_version.outputs.next_tag }}
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ steps.next_version.outputs.next_tag }}
+          name: Release ${{ steps.next_version.outputs.next_tag }}
+          body: |
+            ## Module Release
+
+            Changes were merged into **main** under `modules/`.
+
+            **Version:** ${{ steps.next_version.outputs.next_tag }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
