@@ -17,10 +17,11 @@ resource "aws_instance" "bastion" {
     var.common_tags,
     {
       Name = "${var.env}-bastion"
-    }
   )
 
   depends_on = [
     aws_iam_instance_profile.bastion_profile
   ]
+}
+  )  
 }
