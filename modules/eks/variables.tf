@@ -54,3 +54,4 @@ variable "bastion_access_role_arn" {
   description = "IAM role ARN used for bastion access to EKS"
   type        = string
 }
+
