@@ -1,8 +1,8 @@
-variable "bastion_ami" {
+variable "env" {
   type = string
 }
 
-variable "bastion_instance_type" {
+variable "vpc_id" {
   type = string
 }
 
@@ -10,22 +10,22 @@ variable "public_subnet_ids" {
   type = list(string)
 }
 
-variable "bastion_key_name" {
+variable "ami" {
   type = string
 }
 
-variable "common_tags" {
-  type = map(string)
-}
-
-variable "env" {
+variable "instance_type" {
   type = string
 }
 
-variable "allowed_ssh_cidrs" {
+variable "key_name" {
+  type = string
+}
+
+variable "allowed_ssh_cidr" {
   type = list(string)
 }
 
-variable "vpc_id" {
-  type = string
+variable "tags" {
+  type = map(string)
 }
