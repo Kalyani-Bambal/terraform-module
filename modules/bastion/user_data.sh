@@ -41,3 +41,6 @@ kubectl version --client
 rm -rf /tmp/aws /tmp/awscliv2.zip
 
 echo "Bastion bootstrap completed successfully"
+
+
+# aws eks update-kubeconfig --region ap-northeast-2 --name Shared-cluster
