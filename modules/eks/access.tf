@@ -1,8 +1,12 @@
 resource "aws_eks_access_entry" "bastion_admin" {
   cluster_name  = aws_eks_cluster.this.name
   principal_arn = var.bastion_role_arn
-  type          = "STANDARD"
+
+  lifecycle {
+    ignore_changes = all
+  }
 }
+
 
 resource "aws_eks_access_policy_association" "bastion_admin_policy" {
   cluster_name  = aws_eks_cluster.this.name
