@@ -50,3 +50,6 @@ variable "allowed_cidr_blocks" {
   default = [  ]
 }
 
+variable "public_subnet_ids" {
+  type = list(string)
+}
