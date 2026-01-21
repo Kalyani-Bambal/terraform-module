@@ -45,3 +45,7 @@ variable "allowed_cidr_blocks" {
   type = list(string)
   default = [  ]
 }
+
+variable "bastion_role_arn" {
+  type = string
+}
