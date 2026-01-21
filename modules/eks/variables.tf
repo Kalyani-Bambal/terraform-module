@@ -45,3 +45,13 @@ variable "allowed_cidr_blocks" {
   type = list(string)
   default = [  ]
 }
+
+variable "aws_auth_roles" {
+  description = "List of IAM roles to add to aws-auth"
+  type = list(object({
+    rolearn = string
+    username = string
+    groups   = list(string)
+  }))
+  default = []
+}

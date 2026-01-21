@@ -99,3 +99,17 @@ resource "aws_security_group_rule" "allow_private_endpoint_access" {
   cidr_blocks      = var.allowed_cidr_blocks
   description = "Allow access to EKS cluster private endpoint from bastion/ vpc"
 }
+
+module "eks" {
+  source  = "terraform-aws-modules/eks/aws"
+  version = "~> 20.0"
+
+  cluster_name    = var.cluster_name
+  cluster_version = "1.29"
+
+  manage_aws_auth_configmap = true
+
+  aws_auth_roles = var.aws_auth_roles
+
+  # other EKS settings
+}
