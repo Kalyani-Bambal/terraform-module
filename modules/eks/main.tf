@@ -20,23 +20,31 @@ resource "aws_iam_role_policy_attachment" "cluster_policy_attachment" {
 }
 
 resource "aws_eks_cluster" "this" {
-  name = var.cluster_name
-  role_arn = aws_iam_role.eks_cluster_role.arn
-  version = var.cluster_version
+  name       = var.cluster_name
+  role_arn  = aws_iam_role.eks_cluster_role.arn
+  version   = var.cluster_version
 
   vpc_config {
-    subnet_ids = var.private_subnet_ids
+    subnet_ids              = var.private_subnet_ids
     endpoint_private_access = false
-    endpoint_public_access = true
+    endpoint_public_access  = true
   }
 
-  tags = merge (
+  ################################
+  # 🔐 EKS AUTH MODE (ADDED)
+  ################################
+  access_config {
+    authentication_mode = "API_AND_CONFIG_MAP"
+  }
+
+  tags = merge(
     var.tags,
     {
-        Name = var.cluster_name
+      Name = var.cluster_name
     }
   )
 }
+
 
 resource "aws_iam_role" "node_role" {
  name = "${var.env}-eks-node-role"
