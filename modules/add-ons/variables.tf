@@ -2,14 +2,9 @@ variable "cluster_name" {
   type = string
 }
 
-variable "kube_proxy_version" {
-  type = string
-}
-
-variable "coredns_version" {
-  type = string
-}
-
-variable "vpc_cni_version" {
-  type = string
+variable "addons" {
+  description = "Map of EKS addons to enable"
+  type = map(object({
+    version = optional(string)
+  }))
 }

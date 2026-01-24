@@ -1,17 +1,10 @@
-resource "aws_eks_addon" "kube-proxy" {
-  cluster_name    = var.cluster_name
-  addon_name      = "kube-proxy"
-  addon_version   = var.kube_proxy_version
-  }
+resource "aws_eks_addon" "this" {
+  for_each = var.addons
 
-  resource "aws_eks_addon" "coredns" {
-    cluster_name    = var.cluster_name
-    addon_name      = "coredns"
-    addon_version   = var.coredns_version
-  }
+  cluster_name  = var.cluster_name
+  addon_name    = each.key
+  addon_version = try(each.value.version, null)
 
-  resource "aws_eks_addon" "vpc-cni" {
-    cluster_name    = var.cluster_name
-    addon_name      = "vpc-cni"
-    
-  }
+  resolve_conflicts_on_create = "OVERWRITE"
+  resolve_conflicts_on_update = "OVERWRITE"
+}
