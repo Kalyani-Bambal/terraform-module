@@ -12,3 +12,7 @@ variable "values" {
   type = list(string)
     default = []
 }
+
+variable "cluster_name" {
+  type = string
+}
