@@ -16,3 +16,7 @@ variable "values" {
 variable "cluster_name" {
   type = string
 }
+
+variable "bootstrap_file" {
+  type = string
+}
